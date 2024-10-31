@@ -33,4 +33,6 @@ Route::get('/admin/dashboard',[AdminDashController::class,'index'])->name('admin
 Route::get('/admin/profile',[UserController::class,'profile'])->name('admin.prolile');
 Route::post('/admin/confirm',[RegisterController::class,'confirm_email'])->name('confirm.email');
 Route::get('/verify/emai/{token}', [RegisterController::class, 'verify_emails']);
+Route::get('admin/user/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::post('admin/user/update', [UserController::class, 'update'])->name('user.update');
 });
