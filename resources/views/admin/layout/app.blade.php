@@ -12,7 +12,17 @@
       href="{{asset('assets/img/logo.png')}}"
       type="image/x-icon"
     />
+    <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css')}}">
+    <style>
+      .toast-success {
+          background-color: #28a745 !important; /* اللون الأخضر */
+      }
 
+      /* تخصيص لون الخلفية لرسالة الخطأ */
+      .toast-error {
+          background-color: #dc3545 !important; /* اللون الأحمر */
+      }
+    </style>
     <!-- Fonts and icons -->
     <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
     <script>
@@ -40,6 +50,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}" />
+    @yield('header')
   </head>
   <body>
     
@@ -476,7 +487,7 @@
                               @endif
                             </p>
                             <a
-                              href=""
+                              href="{{route('admin.prolile')}}"
                               class="btn btn-xs btn-secondary btn-sm"
                               >View Profile</a
                             >
@@ -733,69 +744,26 @@
       </div>
       <!-- End Custom template -->
     </div>
-    <!--   Core JS Files   -->
-    <script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+    @yield('script')
+    
+<script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js')}}"></script>
+<script>
+        toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right", 
+        "timeOut": "5000"
+    };
+    @if(session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
 
-    <!-- jQuery Scrollbar -->
-    <script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-
-    <!-- Chart JS -->
-    <script src="{{asset('assets/js/plugin/chart.js/chart.min.js')}}"></script>
-
-    <!-- jQuery Sparkline -->
-    <script src="{{asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
-
-    <!-- Chart Circle -->
-    <script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
-
-    <!-- Datatables -->
-    <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
-
-    <!-- Bootstrap Notify -->
-    <script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-
-    <!-- jQuery Vector Maps -->
-    <script src="{{asset('assets/js/plugin/jsvectormap/jsvectormap.min.js')}}"></script>
-    <script src="{{asset('assets/js/plugin/jsvectormap/world.js')}}"></script>
-
-    <!-- Sweet Alert -->
-    <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
-
-    <!-- Kaiadmin JS -->
-    <script src="{{asset('assets/js/kaiadmin.min.js')}}"></script>
-
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="{{asset('assets/js/setting-demo.js')}}"></script>
-    <script src="{{asset('assets/js/demo.js')}}"></script>
-    <script>
-      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#177dff",
-        fillColor: "rgba(23, 125, 255, 0.14)",
-      });
-
-      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#f3545d",
-        fillColor: "rgba(243, 84, 93, .14)",
-      });
-
-      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#ffa534",
-        fillColor: "rgba(255, 165, 52, .14)",
-      });
-    </script>
+    @if(session('error'))
+        toastr.error("{{ session('error') }}");
+    @endif
+</script>
+<script src="{{url('https://code.jquery.com/jquery-3.3.1.slim.min.js')}}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="{{url('https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js')}}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="{{url('https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js')}}" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
 </html>

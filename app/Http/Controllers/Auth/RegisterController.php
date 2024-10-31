@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use DB;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
@@ -81,6 +83,41 @@ class RegisterController extends Controller
         $user->save();
 
         return redirect()->route('login')->with('success', 'Account activated successfully!.');
+
+    }
+    public function confirm_email(Request $request){
+    // Get the currently registered user
+    $user = Auth::user();
+    
+   // Generate a random token
+    $token = Str::random(60);
+    
+  // Update the email_verification_token field in the database
+    $user->update([
+        'email_verification_token' => $token
+    ]);
+    
+    $currentDate = Carbon::now()->toDateString();
+    $currentTime = Carbon::now()->toTimeString();
+    // Send Massage To Email
+    Mail::send('emails.confirm', ['token' => $token,'email' => $request->email , 'date' => $currentDate,'time'=>$currentTime], function ($message) use ($user) {
+        $message->to($user->email);
+        $message->subject('Virfy Email');
+    });
+    return redirect()->route('admin.prolile')->with('success', 'Congratulations, the confirmation message has been sent. Please confirm the account.');
+    }
+    public function verify_emails($token){
+        $user = User::where('email_verification_token', $token)->first();
+
+        if (!$user) {
+            return redirect()->route('admin.prolile')->with('error', 'Invalid verification link.');
+        }
+
+        $user->email_verified = true;
+        $user->email_verification_token = null;
+        $user->save();
+
+        return redirect()->route('admin.prolile')->with('success', 'Account activated successfully!.');
 
     }
 }
