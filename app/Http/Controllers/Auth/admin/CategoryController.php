@@ -157,7 +157,7 @@ class CategoryController extends Controller
     }
     public function downloadPdf(Category $category)
     {
-        $pdf = Pdf::loadView('admin.categories.pdf', compact('category'));
+        $pdf = Pdf::loadView('admin.category.pdf', compact('category'));
         return $pdf->download('category-' . $category->id . '.pdf');
     }
 }
