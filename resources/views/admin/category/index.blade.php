@@ -3,6 +3,22 @@
 @section('header')
 @endsection
 @section('content')
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="Image" style="width: 100%; height: auto;">
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
           <div class="page-inner">
             <div
@@ -84,16 +100,16 @@
                                 <td>{!! $category->description_zh !!}</td>
                                 <td>{!! $category->description_tr !!}</td>
                                 <td>
-                                    <img src="{{ asset('storage/' . $category->image) }}" alt="Main Image" width="100">
+                                <img src="{{ asset('storage/' . $category->image) }}" alt="Main Image" width="100" style="cursor: pointer;">
                                 </td>
                                 <td>
-                                    @if($category->images)
-                                        @foreach ($category->images as $image)
-                                            <img src="{{ asset('storage/' . $image) }}" alt="Additional Image" width="50">
-                                        @endforeach
-                                    @else
-                                        No additional images
-                                    @endif
+                                @if($category->images)
+                                    @foreach ($category->images as $image)
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Additional Image" width="50" style="cursor: pointer;">
+                                    @endforeach
+                                @else
+                                    No additional images
+                                @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('categories.show', $category) }}">View</a> |
@@ -188,4 +204,15 @@
         });
       });
     </script>
+    <script>
+  $(document).ready(function () {
+    // When clicking on an image
+    $('tbody img').click(function() {
+      var imageSrc = $(this).attr('src'); // Get image source
+      $('#modalImage').attr('src', imageSrc); // Set the source for the image in the popup window
+      $('#imageModal').modal('show'); // Display the popup window
+    });
+  });
+</script>
+
 @endsection
