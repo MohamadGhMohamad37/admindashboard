@@ -112,13 +112,21 @@
                                 @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('categories.show', $category) }}">View</a> |
-                                    <a href="{{ route('categories.edit', $category) }}">Edit</a> |
-                                    <a href="{{ route('categories.pdf', $category) }}">Download PDF</a> |
-                                    <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
+                                    <a href="{{ route('categories.show', $category) }}" class="btn btn-icon btn-round btn-info">
+                                      <i class="fa fa-info"></i>
+                                    </a> |
+                                    <a href="{{ route('categories.edit', $category) }}"  class="btn btn-icon btn-round btn-warning">
+                                        <i class="icon-note"></i>
+                                    </a> |
+                                    <a href="{{ route('categories.pdf', $category) }}"  class="btn btn-icon btn-round btn-secondary">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </a> |
+                                    <form id="delete-form-{{ $category->id }}" action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="button" id="alert_demo_{{ $category->id }}" class="btn btn-icon btn-round btn-danger">
+                                            <i class="fas fa-backspace"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -134,10 +142,11 @@
 
 @endsection
 @section('script')
-
-    <!--   Core JS Files   -->
+<script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
     <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+    <!-- Sweet Alert -->
+    <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
 
     <!-- jQuery Scrollbar -->
     <script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
@@ -147,6 +156,60 @@
     <script src="{{asset('assets/js/kaiadmin.min.js')}}"></script>
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="{{asset('assets/js/setting-demo2.js')}}"></script>
+    <script>
+    var SweetAlert2Demo = (function () {
+        //== Demos
+        var initDemos = function () {
+            $("button[id^='alert_demo_']").click(function (e) {
+                e.preventDefault(); // Prevent default button behavior
+                var formId = $(this).attr('id').replace('alert_demo_', 'delete-form-'); // Get form ID
+                
+                swal({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: "No, cancel!",
+                            className: "btn btn-danger",
+                        },
+                        confirm: {
+                            text: "Yes, delete it!",
+                            className: "btn btn-success",
+                        },
+                    },
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        // If confirmed, submit the form
+                        $("#" + formId).submit();
+                    } else {
+                        swal("Your imaginary file is safe!", {
+                            buttons: {
+                                confirm: {
+                                    className: "btn btn-success",
+                                },
+                            },
+                        });
+                    }
+                });
+            });
+        };
+
+        return {
+            //== Init
+            init: function () {
+                initDemos();
+            },
+        };
+    })();
+
+    // Initialize the SweetAlert demo
+    $(document).ready(function() {
+        SweetAlert2Demo.init();
+    });
+</script>
+
     <script>
       $(document).ready(function () {
         $("#basic-datatables").DataTable({});
