@@ -440,7 +440,13 @@
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Mohamad</span>
+                      <span class="fw-bold">
+                      @if (Auth::check())
+                      {{ Auth::user()->first_name }}
+                      @else
+                      No Result
+                      @endif
+                      </span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -455,10 +461,22 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Mohamad Ghazi Mohamad</h4>
-                            <p class="text-muted">mohamad@gmail.com</p>
+                            <h4>
+                            @if (Auth::check())
+                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                            @else
+                            No Result
+                            @endif
+                            </h4>
+                            <p class="text-muted">
+                            @if (Auth::check())
+                            {{ Auth::user()->email }}
+                              @else
+                              No Result
+                              @endif
+                            </p>
                             <a
-                              href="profile.html"
+                              href=""
                               class="btn btn-xs btn-secondary btn-sm"
                               >View Profile</a
                             >
