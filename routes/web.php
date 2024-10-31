@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\admin\AdminDashController;
 use App\Http\Controllers\Auth\admin\user\UserController;
+use App\Http\Controllers\Auth\admin\CategoryController;
+
 use App\Http\Controllers\StatckController;
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +37,6 @@ Route::post('/admin/confirm',[RegisterController::class,'confirm_email'])->name(
 Route::get('/verify/emai/{token}', [RegisterController::class, 'verify_emails']);
 Route::get('admin/user/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::post('admin/user/update', [UserController::class, 'update'])->name('user.update');
+Route::resource('admin/categories', CategoryController::class);
+Route::get('admin/categories/{category}/pdf', [CategoryController::class, 'downloadPdf'])->name('categories.pdf');
 });
