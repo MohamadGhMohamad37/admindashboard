@@ -3,6 +3,26 @@
 @section('header')
 <link href="{{url('https://unpkg.com/filepond/dist/filepond.css')}}" rel="stylesheet">
 <script src="{{url('https://unpkg.com/filepond/dist/filepond.js')}}"></script>
+
+<style>
+    .drop-area {
+        border: 2px dashed #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .drop-area.hover {
+        border-color: #333;
+    }
+    .gallery-image {
+        display: inline-block;
+        margin: 5px;
+        max-width: 100px;
+        max-height: 100px;
+    }
+</style>
 @endsection
 @section('content')
 <div class="container">
@@ -83,114 +103,124 @@
         </div>
 
         <div class="form-group">
-            <label>Main Image</label>
-            <div id="dropzone" style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
-                <p>Drag image here or click to select image</p>
-                <input type="file" id="fileInput" name="image" style="display: none;">
-                <img id="preview" src="#" alt="Preview" style="display: none; max-width: 100%; margin-top: 10px;">
+            <label for="image">Image</label>
+            <div id="drop-area" class="drop-area">
+                <p>Drag & Drop your image here or click to select</p>
+                <input type="file" name="image" id="image" class="form-control" required style="display: none;">
+                <img id="image-preview" src="#" alt="Image Preview" style="display: none; margin-top: 10px; max-width: 100%;">
             </div>
         </div>
-                <!-- Progress bar -->
-                <div id="progressContainer" style="display: none; margin-top: 10px;">
-            <div style="border: 1px solid #ccc; width: 100%; height: 20px; background-color: #f3f3f3;">
-                <div id="progressBar" style="height: 100%; width: 0%; background-color: green;"></div>
-            </div>
-            <span id="progressPercentage" style="display: none;">0%</span>
-        </div>
-        <div id="imageDetails" style="margin-top: 10px; display: none;">
-            <h5>Image details:</h5>
-            <p><strong>the name:</strong> <span id="imageName"></span></p>
-            <p><strong>Size:</strong> <span id="imageSize"></span></p>
-            <p><strong>Type:</strong> <span id="imageType"></span></p>
-        </div>
-        <!-- Multiple Image Upload with FilePond -->
+
         <div class="form-group">
-            <label>Additional Images</label>
-            <input type="file" name="images[]" id="imageUpload" class="filepond" accept="image/*" multiple>
+            <label for="gallery_images">Gallery Images</label>
+            <div id="gallery-drop-area" class="drop-area">
+                <p>Drag & Drop your gallery images here or click to select</p>
+                <input type="file" name="images[]" id="gallery_images" class="form-control" multiple style="display: none;">
+                <div id="gallery-preview" style="margin-top: 10px;"></div>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Save Category</button>
     </form>
 </div>
 
-<script>
-      const dropzone = document.getElementById('dropzone');
-    const fileInput = document.getElementById('fileInput');
-    const preview = document.getElementById('preview');
-    const imageDetails = document.getElementById('imageDetails');
-    const imageName = document.getElementById('imageName');
-    const imageSize = document.getElementById('imageSize');
-    const imageType = document.getElementById('imageType');
-    const progressContainer = document.getElementById('progressContainer');
-    const progressBar = document.getElementById('progressBar');
-    const progressPercentage = document.getElementById('progressPercentage');
+<script>  // Handle single image upload
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('image');
+    const imagePreview = document.getElementById('image-preview');
 
-    dropzone.addEventListener('dragover', (event) => {
-        event.preventDefault(); // To prevent default behavior
-        dropzone.style.borderColor = 'green';// Change border color when dragging
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
     });
 
-    dropzone.addEventListener('dragleave', () => {
-        dropzone.style.borderColor = '#ccc'; // Restore default color when leaving
+    // Highlight drop area when item is dragged over it
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => dropArea.classList.add('hover'), false);
     });
 
-    dropzone.addEventListener('drop', (event) => {
-        event.preventDefault(); // To prevent default behavior
-        dropzone.style.borderColor = '#ccc'; // Restore default color
-        const files = event.dataTransfer.files; // Get the files you have pulled
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => dropArea.classList.remove('hover'), false);
+    });
 
-        if (files.length > 0) {
-            fileInput.files = files; // Set input files
-            displayImage(files[0]); // Display image
-            uploadFile(files[0]); // Start uploading the file
+    // Handle dropped files
+    dropArea.addEventListener('drop', handleDrop, false);
+    dropArea.addEventListener('click', () => fileInput.click());
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
+
+    function handleFiles(files) {
+        if (files.length) {
+            const file = files[0];
+            // Update the file input with the dropped file
+            fileInput.files = files; // This line ensures the dropped file is set
+            displayImage(file);
         }
-    });
+    }
 
-    dropzone.addEventListener('click', () => {
-        fileInput.click(); // Open file selection dialog when clicking on the area
-    });
-
-    fileInput.addEventListener('change', (event) => {
-        const files = event.target.files; // Get selected files
-
-        if (files.length > 0) {
-            displayImage(files[0]); // Display image
-            uploadFile(files[0]); // Start uploading the file
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            displayImage(file);
         }
     });
 
     function displayImage(file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            preview.src = e.target.result; // Set the image source to display
-            preview.style.display = 'block'; // Display image
-
-            // عرض تفاصيل الصورة
-            imageName.textContent = file.name; // Image name
-            imageSize.textContent = (file.size / 1024).toFixed(2) + ' KB'; // Size (in KB)
-            imageType.textContent = file.type; // Image type
-            imageDetails.style.display = 'block';// Show image details
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block'; // Show the image
         }
-        reader.readAsDataURL(file); // Read file as Data URL
+        reader.readAsDataURL(file);
     }
+// Handle gallery images upload
+const galleryDropArea = document.getElementById('gallery-drop-area');
+const galleryFileInput = document.getElementById('gallery_images');
+const galleryPreview = document.getElementById('gallery-preview');
 
-    function uploadFile(file) {
-        const xhr = new XMLHttpRequest();
-        const formData = new FormData();
-        formData.append('image', file); // Add the file to FormData
+galleryDropArea.addEventListener('drop', handleGalleryDrop, false);
+galleryDropArea.addEventListener('click', () => galleryFileInput.click());
 
-    // Update progress bar
-        xhr.upload.addEventListener('progress', (event) => {
-            if (event.lengthComputable) {
-                const percentComplete = (event.loaded / event.total) * 100;
-                progressBar.style.width = percentComplete + '%'; // Set the width of the progress bar
-                progressPercentage.textContent = Math.round(percentComplete) + '%'; // Display percentage
-                progressPercentage.style.display = 'block'; // Display percentage
-                progressContainer.style.display = 'block'; // Display progress bar container
-            }
-        });
+function handleGalleryDrop(e) {
+    preventDefaults(e); // Prevent default behavior
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    handleGalleryFiles(files);
+}
 
+galleryFileInput.addEventListener('change', (e) => {
+    const files = e.target.files;
+    if (files.length) {
+        handleGalleryFiles(files);
     }
+});
+
+function handleGalleryFiles(files) {
+    galleryPreview.innerHTML = ''; // Clear previous images
+    Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('gallery-image');
+            galleryPreview.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+    });
+
+    // Update the file input with the dropped files
+    galleryFileInput.files = files; // This line ensures the dropped files are set
+}
 
 </script>
           </div>
