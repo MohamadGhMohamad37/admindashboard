@@ -120,7 +120,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="">
+                      <a href="{{ route('subcategories.index') }}">
                         <span class="sub-item">Sub Category</span>
                       </a>
                     </li>

@@ -81,27 +81,27 @@
                 <!-- Descriptions in Multiple Languages -->
                 <div class="form-group">
                     <label>Description (En)</label>
-                    <textarea name="description_en" id="editor_en" rows="5" class="form-control">{{ old('description_en', $category->description_en) }}</textarea>
+                    <textarea name="description_en" id="editor_en" rows="5" class="form-control">{!! old('description_en', $category->description_en) !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Description (De)</label>
-                    <textarea name="description_de" id="editor_de" class="form-control" rows="3">{{ old('description_de', $category->description_de) }}</textarea>
+                    <textarea name="description_de" id="editor_de" class="form-control" rows="3">{!! old('description_de', $category->description_de) !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Description (Fr)</label>
-                    <textarea name="description_fr" id="editor_fr" class="form-control" rows="3">{{ old('description_fr', $category->description_fr) }}</textarea>
+                    <textarea name="description_fr" id="editor_fr" class="form-control" rows="3">{!! old('description_fr', $category->description_fr) !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Description (Ar)</label>
-                    <textarea name="description_ar" id="editor_ar" class="form-control" rows="3">{{ old('description_ar', $category->description_ar) }}</textarea>
+                    <textarea name="description_ar" id="editor_ar" class="form-control" rows="3">{!! old('description_ar', $category->description_ar) !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Description (Zh)</label>
-                    <textarea name="description_zh" id="editor_zh" class="form-control" rows="3">{{ old('description_zh', $category->description_zh) }}</textarea>
+                    <textarea name="description_zh" id="editor_zh" class="form-control" rows="3">{!! old('description_zh', $category->description_zh) !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Description (Tr)</label>
-                    <textarea name="description_tr" id="editor_tr" class="form-control" rows="3">{{ old('description_tr', $category->description_tr) }}</textarea>
+                    <textarea name="description_tr" id="editor_tr" class="form-control" rows="3">{!! old('description_tr', $category->description_tr) !!}</textarea>
                 </div>
 
                 <div class="form-group">
