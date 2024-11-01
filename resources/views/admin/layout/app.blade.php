@@ -125,7 +125,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="">
+                      <a href="{{ route('products.index') }}">
                         <span class="sub-item">Product</span>
                       </a>
                     </li>

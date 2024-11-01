@@ -29,7 +29,7 @@ return new class extends Migration
             $table->json('gallery_images')->nullable(); // لتخزين مجموعة الصور كـ JSON
             $table->string('video')->nullable();
             $table->string('pdf_file')->nullable();
-            $table->foreignId('sub_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subcategories')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

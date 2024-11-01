@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\admin\AdminDashController;
 use App\Http\Controllers\Auth\admin\user\UserController;
 use App\Http\Controllers\Auth\admin\CategoryController;
 use App\Http\Controllers\Auth\admin\SubcategoryController;
+use App\Http\Controllers\Auth\admin\ProductController;
 
 use App\Http\Controllers\StatckController;
 /*
@@ -42,5 +43,8 @@ Route::resource('admin/categories', CategoryController::class);
 Route::get('admin/categories/{category}/pdf', [CategoryController::class, 'downloadPdf'])->name('categories.pdf');
 Route::resource('admin/subcategories', SubcategoryController::class);
 Route::get('admin/subcategories/{subcategory}/download-pdf', [SubcategoryController::class, 'downloadPdf'])->name('subcategories.downloadPdf');
+Route::resource('products', ProductController::class);
+Route::get('products/{id}/pdf', [ProductController::class, 'downloadPdf'])->name('products.downloadPdf');
+
 
 });
