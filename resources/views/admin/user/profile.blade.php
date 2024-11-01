@@ -27,7 +27,16 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="avatar-online ">
-                        <img src="{{asset('assets/img/jm_denis.jpg')}}" class="avatar-img rounded-circle" alt="">
+                          
+                        @if (Auth::check())
+                            @if(Auth::user()->profile_image)
+                                <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" class="avatar-img rounded-circle" alt="">
+                            @else
+                                <img src="{{ asset('assets/img/user.jpg') }}" class="avatar-img rounded-circle" alt="">
+                            @endif
+                        @else
+                            No Result
+                        @endif
                         </div>
                       </div>
                     </div>

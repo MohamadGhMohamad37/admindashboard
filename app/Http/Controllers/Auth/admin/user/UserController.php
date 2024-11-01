@@ -40,6 +40,7 @@ class UserController extends Controller
             'address2' => 'nullable|string',
             'zip_code' => 'required|string',
             'phone_number' => 'required|string',
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $user->first_name = $request->first_name;
@@ -58,6 +59,15 @@ class UserController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+        //chec image for update
+        
+        if ($request->hasFile('profile_image')) { 
+            if ($user->profile_image) {
+                Storage::delete($user->profile_image);
+            }
+            $user->profile_image = $request->file('profile_image')->store('profiles', 'public'); // حفظ الصورة الجديدة
+        }
+        
             // Check email change
    
     if ($request->email !== $user->email) {

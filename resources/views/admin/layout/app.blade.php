@@ -469,11 +469,15 @@
                     aria-expanded="false"
                   >
                     <div class="avatar-sm">
-                      <img
-                        src="{{asset('assets/img/profile.jpg')}}"
-                        alt="..."
-                        class="avatar-img rounded-circle"
-                      />
+                    @if (Auth::check())
+                            @if(Auth::user()->profile_image)
+                                <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" class="avatar-img rounded-circle" alt="">
+                            @else
+                                <img src="{{ asset('assets/img/user.jpg') }}" class="avatar-img rounded-circle" alt="">
+                            @endif
+                        @else
+                            No Result
+                        @endif
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
@@ -491,11 +495,15 @@
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
-                            <img
-                              src="{{asset('assets/img/profile.jpg')}}"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
+                          @if (Auth::check())
+                            @if(Auth::user()->profile_image)
+                                <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" class="avatar-img rounded" alt="">
+                            @else
+                                <img src="{{ asset('assets/img/user.jpg') }}" class="avatar-img rounded" alt="">
+                            @endif
+                        @else
+                            No Result
+                        @endif
                           </div>
                           <div class="u-text">
                             <h4>
@@ -522,11 +530,10 @@
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
                         <a class="dropdown-item" href="#">My Balance</a>
                         <a class="dropdown-item" href="#">Inbox</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Account Setting</a>
+                        <a class="dropdown-item" href="{{route('user.edit')}}">Account Setting</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

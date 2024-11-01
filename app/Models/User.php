@@ -33,6 +33,7 @@ class User extends Authenticatable
         'zip_code',
         'phone_number',
         'email_verification_token',
+        'profile_image',
         'role',
     ];
 
