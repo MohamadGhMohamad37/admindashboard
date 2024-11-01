@@ -115,7 +115,7 @@
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="">
+                      <a href="{{ route('categories.index') }}">
                         <span class="sub-item">Category</span>
                       </a>
                     </li>
