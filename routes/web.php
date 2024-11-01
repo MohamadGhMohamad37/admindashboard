@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\admin\SubcategoryController;
 use App\Http\Controllers\Auth\admin\ProductController;
 
 use App\Http\Controllers\StatckController;
+use App\Http\Controllers\StripeBalanceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,6 @@ Route::resource('admin/subcategories', SubcategoryController::class);
 Route::get('admin/subcategories/{subcategory}/download-pdf', [SubcategoryController::class, 'downloadPdf'])->name('subcategories.downloadPdf');
 Route::resource('products', ProductController::class);
 Route::get('products/{id}/pdf', [ProductController::class, 'downloadPdf'])->name('products.downloadPdf');
-
+Route::get('/stripe-balance', [StripeBalanceController::class, 'showBalance'])->name('stripe.balance');
 
 });

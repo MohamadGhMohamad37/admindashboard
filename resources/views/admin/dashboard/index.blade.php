@@ -14,6 +14,100 @@
                 <h6 class="op-7 mb-2">Admin Dashboard Create By Mohamad Ghazi Mohamad</h6>
               </div>
             </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="icon-pie-chart text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Number</p>
+                          <h4 class="card-title">150GB</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="icon-wallet text-success"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Available amounts</p>
+                          <h4 class="card-title">
+                          @if($available)
+                                  @foreach($available as $item)
+                                      <p>{{ $item['amount'] }} {{ $item['currency'] }}</p>
+                                  @endforeach
+                          @else
+                              <p>There is no available balance at this time..</p>
+                          @endif
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="icon-close text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Outstanding amounts</p>
+                          <h4 class="card-title">
+                          @if($pending)
+                                  @foreach($pending as $item)
+                                      <p>{{ $item['amount'] }} {{ $item['currency'] }}</p>
+                                  @endforeach
+                          @else
+                              <p>There is no pending balance currently..</p>
+                          @endif
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="icon-social-twitter text-primary"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Followers</p>
+                          <h4 class="card-title">+45K</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         @endsection
