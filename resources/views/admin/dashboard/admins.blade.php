@@ -65,6 +65,7 @@
                             <th>profile image</th>
                             <th>created at</th>
                             <th>updated at</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tfoot>
@@ -86,6 +87,7 @@
                             <th>profile image</th>
                             <th>created at</th>
                             <th>updated at</th>
+                            <th>Action</th>
                           </tr>
                         </tfoot>
                         <tbody>
@@ -125,6 +127,21 @@
                                 </td>
                                 <td>{{ $admin->created_at }}</td>
                                 <td>{{ $admin->updated_at }}</td>
+                                <td>
+                                    <!-- Show Button -->
+                                    <a href="{{ route('admin.showadmin', $admin->id) }}" class="btn btn-sm btn-info">
+                                        <i class="fa fa-eye"></i> Show
+                                    </a>
+                                    <!-- Delete Button -->
+                                    <button class="btn btn-sm btn-danger" id="alert_demo_{{ $admin->id }}">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                    <!-- Delete Form (Hidden) -->
+                                    <form id="delete-form-{{ $admin->id }}" action="{{ route('admin.deleteadmin', $admin->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

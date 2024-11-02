@@ -121,6 +121,19 @@ class AdminDashController extends Controller
 
 
     }
+    public function adminshow($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.dashboard.showadmin', compact('user'));
+    }
+
+    public function admindestroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.admins')->with('success', 'User deleted successfully.');
+    }
     
     public function usersget(){
         $users = User::where('role', 'user')->get();

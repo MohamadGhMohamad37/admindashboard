@@ -54,5 +54,7 @@ Route::get('admin/users/create',[AdminDashController::class,'userscreate'])->nam
 Route::post('admin/admin/create',[AdminDashController::class,'storeuser'])->name('admin.storeuser');
 Route::get('admin/users/{id}', [AdminDashController::class, 'usershow'])->name('admin.showuser');
 Route::delete('admin/users/{id}', [AdminDashController::class, 'userdestroy'])->name('admin.deleteuser');
+Route::get('admin/admins/{id}', [AdminDashController::class, 'adminshow'])->name('admin.showadmin');
+Route::delete('admin/admins/{id}', [AdminDashController::class, 'admindestroy'])->name('admin.deleteadmin');
 
 });
