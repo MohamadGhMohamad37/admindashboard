@@ -30,6 +30,12 @@ class ProductController extends Controller
             'name_ar' => 'required|string|max:255',
             'name_fr' => 'required|string|max:255',
             'name_zh' => 'required|string|max:255',
+            'price' => [
+                'required',
+                'numeric',
+                'min:0',
+                'regex:/^\d+(\.\d{1,2})?$/'
+            ],
             'description_en' => 'required|string|max:1000',
             'description_de' => 'required|string|max:1000',
             'description_tr' => 'required|string|max:1000',
@@ -90,6 +96,12 @@ class ProductController extends Controller
             'description_ar' => 'required|string|max:1000',
             'description_fr' => 'required|string|max:1000',
             'description_zh' => 'required|string|max:1000',
+            'price' => [
+                'required',
+                'numeric',
+                'min:0',
+                'regex:/^\d+(\.\d{1,2})?$/'
+            ],
             'main_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'video' => 'mimes:mp4,avi,mov|max:10240',

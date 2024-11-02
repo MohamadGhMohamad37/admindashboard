@@ -54,6 +54,7 @@
                             <th>Name (Tr)</th>
                             <th>Name (Ar)</th>
                             <th>Name (Zh)</th>
+                            <th>Price</th>
                             <th>Disc (En)</th>
                             <th>Disc (De)</th>
                             <th>Disc (Fr)</th>
@@ -76,6 +77,7 @@
                             <th>Name (Tr)</th>
                             <th>Name (Ar)</th>
                             <th>Name (Zh)</th>
+                            <th>Price</th>
                             <th>Disc (En)</th>
                             <th>Disc (De)</th>
                             <th>Disc (Fr)</th>
@@ -99,6 +101,7 @@
                                 <td>{{ $product->name_ar }}</td>
                                 <td>{{ $product->name_zh }}</td>
                                 <td>{{ $product->name_tr }}</td>
+                                <td>{{ $product->price }}</td>
                                 <td>{!! $product->description_en !!}</td>
                                 <td>{!! $product->description_de !!}</td>
                                 <td>{!! $product->description_fr !!}</td>

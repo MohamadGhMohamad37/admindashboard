@@ -78,6 +78,10 @@
             <label>Name (Tr)</label>
             <input type="text" name="name_tr" class="form-control">
         </div>
+        <div class="form-group">
+            <label>price</label>
+            <input type="number" name="price" class="form-control">
+        </div>
 
         <!-- Descriptions in Multiple Languages -->
         <div class="form-group">

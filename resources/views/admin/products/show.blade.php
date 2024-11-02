@@ -58,9 +58,13 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <h5>Sub Category:</h5>
                         <p>{{ $product->subCategory->name_en ?? 'No Result' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Price:</h5>
+                        <p>{{ $product->price }}</p>
                     </div>
                 </div>
                 <div class="row mt-4">

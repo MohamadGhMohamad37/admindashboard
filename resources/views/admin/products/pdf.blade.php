@@ -83,6 +83,10 @@
             <th>Sub Category</th>
             <td>{{ $product->subCategory->name_en }}</td>
         </tr>
+        <tr>
+            <th>price</th>
+            <td>{{ $product->price }}</td>
+        </tr>
     </table>
 </body>
 </html>

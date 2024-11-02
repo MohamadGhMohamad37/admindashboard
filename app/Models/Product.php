@@ -25,6 +25,7 @@ class Product extends Model
         'gallery_images',
         'video',
         'pdf_file',
+        'price',
         'subcategories'
     ];
 

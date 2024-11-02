@@ -61,7 +61,7 @@
         </div>
         <div class="form-group">
             <label>Name (De)</label>
-            <input type="text" name="name_de" value="{{ old('name_en', $product->name_de) }}" class="form-control">
+            <input type="text" name="name_de" value="{{ old('name_de', $product->name_de) }}" class="form-control">
         </div>
         <div class="form-group">
             <label>Name (Fr)</label>
@@ -69,15 +69,19 @@
         </div>
         <div class="form-group">
             <label>Name (Ar)</label>
-            <input type="text" name="name_ar" value="{{ old('name_en', $product->name_ar) }}" class="form-control">
+            <input type="text" name="name_ar" value="{{ old('name_ar', $product->name_ar) }}" class="form-control">
         </div>
         <div class="form-group">
             <label>Name (Zh)</label>
-            <input type="text" name="name_zh" value="{{ old('name_en', $product->name_zh) }}" class="form-control">
+            <input type="text" name="name_zh" value="{{ old('name_zh', $product->name_zh) }}" class="form-control">
         </div>
         <div class="form-group">
             <label>Name (Tr)</label>
-            <input type="text" name="name_tr" value="{{ old('name_en', $product->name_tr) }}" class="form-control">
+            <input type="text" name="name_tr" value="{{ old('name_tr', $product->name_tr) }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>price</label>
+            <input type="number" name="price" value="{{ old('price', $product->price) }}" class="form-control">
         </div>
 
         <!-- Descriptions in Multiple Languages -->
@@ -87,23 +91,23 @@
         </div>
         <div class="form-group">
             <label>Description (De)</label>
-            <textarea name="description_de" id="editor_de" class="form-control" rows="3" >{!! old('description_en', $product->description_de) !!}</textarea>
+            <textarea name="description_de" id="editor_de" class="form-control" rows="3" >{!! old('description_de', $product->description_de) !!}</textarea>
         </div>
         <div class="form-group">
             <label>Description (Fr)</label>
-            <textarea name="description_fr" id="editor_fr" class="form-control" rows="3" >{!! old('description_en', $product->description_fr) !!}</textarea>
+            <textarea name="description_fr" id="editor_fr" class="form-control" rows="3" >{!! old('description_fr', $product->description_fr) !!}</textarea>
         </div>
         <div class="form-group">
             <label>Description (Ar)</label>
-            <textarea name="description_ar" id="editor_ar" class="form-control" rows="3" >{!! old('description_en', $product->description_ar) !!}</textarea>
+            <textarea name="description_ar" id="editor_ar" class="form-control" rows="3" >{!! old('description_ar', $product->description_ar) !!}</textarea>
         </div>
         <div class="form-group">
             <label>Description (Zh)</label>
-            <textarea name="description_zh" id="editor_zh" class="form-control" rows="3" >{!! old('description_en', $product->description_zh) !!}</textarea>
+            <textarea name="description_zh" id="editor_zh" class="form-control" rows="3" >{!! old('description_zh', $product->description_zh) !!}</textarea>
         </div>
         <div class="form-group">
             <label>Description (Tr)</label>
-            <textarea name="description_tr" id="editor_tr" class="form-control" rows="3" >{!! old('description_en', $product->description_tr) !!}</textarea>
+            <textarea name="description_tr" id="editor_tr" class="form-control" rows="3" >{!! old('description_tr', $product->description_tr) !!}</textarea>
         </div>
         <div class="form-group">
             <label for="subcategory">Select Sub Category</label>
