@@ -6,10 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Balance;
+use App\Models\Visitor;
+use App\Models\Product;
 
 class AdminDashController extends Controller
 {
     public function index(){
+        //Product Count
+        $productCount = Product::count();
+        //visitor Count
+        $visitorCount = Visitor::count();
+
          // Set Stripe API key
          Stripe::setApiKey(env('STRIPE_SECRET')); // Make sure to put the secret key in the .env file.
 
@@ -35,7 +42,7 @@ class AdminDashController extends Controller
              }
  
              // Return balance to display
-             return view('admin.dashboard.index', compact('available', 'pending'));
+             return view('admin.dashboard.index', compact('available', 'pending','visitorCount','productCount'));
  
          } catch (\Exception $e) {
              return back()->withErrors(['error' => 'An error occurred while fetching the balance.: ' . $e->getMessage()]);

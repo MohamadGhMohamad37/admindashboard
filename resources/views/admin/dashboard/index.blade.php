@@ -21,13 +21,13 @@
                     <div class="row">
                       <div class="col-5">
                         <div class="icon-big text-center">
-                          <i class="icon-pie-chart text-warning"></i>
+                          <i class="icon-people text-warning"></i>
                         </div>
                       </div>
                       <div class="col-7 col-stats">
                         <div class="numbers">
-                          <p class="card-category">Number</p>
-                          <h4 class="card-title">150GB</h4>
+                          <p class="card-category">Number of visitors</p>
+                          <h4 class="card-title">{{ $visitorCount }}</h4>
                         </div>
                       </div>
                     </div>
@@ -94,13 +94,13 @@
                     <div class="row">
                       <div class="col-5">
                         <div class="icon-big text-center">
-                          <i class="icon-social-twitter text-primary"></i>
+                          <i class="icon-social-dropbox text-primary"></i>
                         </div>
                       </div>
                       <div class="col-7 col-stats">
                         <div class="numbers">
-                          <p class="card-category">Followers</p>
-                          <h4 class="card-title">+45K</h4>
+                          <p class="card-category">Number of products</p>
+                          <h4 class="card-title">{{$productCount}}</h4>
                         </div>
                       </div>
                     </div>
