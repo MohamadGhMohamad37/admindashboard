@@ -14,6 +14,9 @@ use DB;
 
 class UserController extends Controller
 {
+    public function index(){
+        $users = User::all();
+    }
     public function profile(){
         return view('admin.user.profile');
     }
@@ -59,7 +62,7 @@ class UserController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-        //chec image for update
+        //check image for update
         
         if ($request->hasFile('profile_image')) { 
             if ($user->profile_image) {

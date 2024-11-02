@@ -132,6 +132,28 @@
                   </ul>
                 </div>
               </li>
+              
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#forms">
+                  <i class="fas fa-address-card"></i>
+                  <p>User</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="forms">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{route('admin.admins')}}">
+                        <span class="sub-item">Admin</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{route('admin.users')}}">
+                        <span class="sub-item">User</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
             </ul>
           </div>
         </div>

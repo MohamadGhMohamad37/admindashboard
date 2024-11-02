@@ -1,118 +1,44 @@
 @extends('admin.layout.app')
-@section('title','Mohamad Ghazi Mohamad Admin Dashboard')
+@section('title','Admin')
 @section('header')
 @endsection
 @section('content')
-
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="Image" style="width: 100%; height: auto;">
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
           <div class="page-inner">
             <div
               class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
             >
               <div>
-                <h3 class="fw-bold mb-3">Dashboard</h3>
-                <h6 class="op-7 mb-2">Admin Dashboard Create By Mohamad Ghazi Mohamad</h6>
+                <h3 class="fw-bold mb-3">Admin</h3>
+                <h6 class="op-7 mb-2">User/ Admin</h6>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="icon-people text-warning"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Number of visitors</p>
-                          <h4 class="card-title">{{ $visitorCount }}</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="icon-wallet text-success"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Available amounts</p>
-                          <h4 class="card-title">
-                          @if($available)
-                                  @foreach($available as $item)
-                                      <p>{{ $item['amount'] }} {{ $item['currency'] }}</p>
-                                  @endforeach
-                          @else
-                              <p>There is no available balance at this time..</p>
-                          @endif
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="icon-close text-danger"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Outstanding amounts</p>
-                          <h4 class="card-title">
-                          @if($pending)
-                                  @foreach($pending as $item)
-                                      <p>{{ $item['amount'] }} {{ $item['currency'] }}</p>
-                                  @endforeach
-                          @else
-                              <p>There is no pending balance currently..</p>
-                          @endif
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="icon-social-dropbox text-primary"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Number of products</p>
-                          <h4 class="card-title">{{$productCount}}</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
             <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title">View All Visitors</h4>
+                    <h4 class="card-title">View All Admin</h4>
+                    <a href="{{ route('admin.createadmin') }}" class="btn btn-primary">
+                        <span class="btn-label">
+                          <i class="fa fa-plus"></i>
+                        </span>
+                        Add New
+                    </a>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -122,33 +48,83 @@
                       >
                         <thead>
                           <tr>
-                            <th>ip address</th>
-                            <th>user agent</th>
-                            <th>Country</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>birth date</th>
+                            <th>job</th>
+                            <th>country</th>
+                            <th>state</th>
+                            <th>city</th>
+                            <th>address1</th>
+                            <th>address2</th>
+                            <th>zip code</th>
+                            <th>phone number</th>
+                            <th>email verified</th>
+                            <th>profile image</th>
                             <th>created at</th>
+                            <th>updated at</th>
                           </tr>
                         </thead>
                         <tfoot>
                           <tr>
-                            <th>ip address</th>
-                            <th>user agent</th>
-                            <th>Country</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>birth date</th>
+                            <th>job</th>
+                            <th>country</th>
+                            <th>state</th>
+                            <th>city</th>
+                            <th>address1</th>
+                            <th>address2</th>
+                            <th>zip code</th>
+                            <th>phone number</th>
+                            <th>email verified</th>
+                            <th>profile image</th>
                             <th>created at</th>
+                            <th>updated at</th>
                           </tr>
                         </tfoot>
                         <tbody>
-                        @foreach ($visitors as $visitor)
+                        @foreach ($admins as $admin)
                             <tr>
-                                <td>{{ $visitor->ip_address }}</td>
-                                <td>{{ $visitor->user_agent }}</td>
+                                <td>{{ $admin->first_name }}</td>
+                                <td>{{ $admin->last_name }}</td>
+                                <td>{{ $admin->username  }}</td>
+                                <td>{{ $admin->email  }}</td>
+                                <td>{{ $admin->birth_date }}</td>
+                                <td>{{ $admin->job }}</td>
+                                <td>{{ $admin->country }}</td>
+                                <td>{{ $admin->state }}</td>
+                                <td>{{ $admin->city }}</td>
+                                <td>{{ $admin->address1 }}</td>
+                                <td>{{ $admin->address2 }}</td>
+                                <td>{{ $admin->zip_code }}</td>
+                                <td>{{ $admin->phone_number }}</td>
                                 <td>
-                                  @if($visitor->country)
-                                  {{ $visitor->country }}
-                                  @else
-                                  No Result
-                                  @endif
+                                    @if($admin->email_verified === 0)
+                                    The Email Not Verifed
+                                    @else
+                                    The Email Verifed
+                                    @endif
                                 </td>
-                                <td>{{ $visitor->created_at }}</td>
+                                <td>
+                        <div class="user-box">
+                          <div class="avatar-lg">
+                            @if($admin->profile_image)
+                                <img src="{{ asset('storage/' . $admin->profile_image) }}" class="avatar-img rounded" alt="">
+                            @else
+                                <img src="{{ asset('assets/img/user.jpg') }}" class="avatar-img rounded" alt="">
+                            @endif
+                            </div>
+                        </div>
+
+                                </td>
+                                <td>{{ $admin->created_at }}</td>
+                                <td>{{ $admin->updated_at }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -159,7 +135,8 @@
               </div>
           </div>
         </div>
-        @endsection
+
+@endsection
         @section('script')
         
         
